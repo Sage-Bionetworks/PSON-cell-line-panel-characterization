@@ -1,6 +1,10 @@
 # PSON-cell-line-panel-characterization
 PSON cell line data model schema, database scripts, and related utilities
 
+
+![alt text](https://raw.githubusercontent.com/milen-sage/PSON-cell-line-panel-characterization/master/data_model_fig3.png)
+
+
 To instantiate a MySQL database:
 
 1) download data from Synapse (free account creation is required and takes 5 minutes):
