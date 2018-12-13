@@ -10,7 +10,7 @@ Placeholder instructions:
 To instantiate a MySQL database:
 
 1) download data from Synapse (free account creation is required and takes 5 minutes):
-https://www.synapse.org/#!Synapse:syn17093184
+[a link](https://www.synapse.org/#!Synapse:syn7248578){:target="_blank"}
 
 2) clone this repository
 
@@ -31,7 +31,7 @@ mysql>source path/to/db-populate.sql
 To instantiate a SQLite database:
 
 1) download data from Synapse (free account creation is required and takes 5 minutes):
-https://www.synapse.org/#!Synapse:syn17093184
+[a link](https://www.synapse.org/#!Synapse:syn7248578){:target="_blank"}
 
 2) clone this repository
 
