@@ -3,7 +3,7 @@ PSON cell line data model schema, database scripts, and related utilities
 
 Placeholder figure:
 
-![alt text](https://raw.githubusercontent.com/milen-sage/PSON-cell-line-panel-characterization/master/data_model_fig3.png)
+![alt text](https://raw.githubusercontent.com/milen-sage/PSON-cell-line-panel-characterization/master/data_model_fig.png)
 
 Placeholder instructions:
 
