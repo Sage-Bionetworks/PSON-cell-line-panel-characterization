@@ -1,3 +1,6 @@
+/* SQLEditor (MySQL (2))*/
+
+
 CREATE TABLE cell_line
 (
 id INT COMMENT 'Primary key.',
@@ -5,26 +8,6 @@ cl_id CHAR UNIQUE  COMMENT 'Cell line id: normalized string uniquely identifying
 cell_line CHAR COMMENT 'Human readable cell line identifier (could be a catalog number or a different standard cell line term).',
 disease CHAR COMMENT 'Disease associated with cell line sample. Set to NORMAL if no disease presented in sample. Disease terms not derived from controlled vocabulary at present.',
 tissue CHAR COMMENT 'Source tissue of cell line sample.',
-PRIMARY KEY (id)
-);
-
-CREATE TABLE exome_mutation_annotation
-(
-id INT,
-exome_id INT COMMENT 'Foreign key. Unique key for each exome sequencing experiment (per cell line per condition).',
-HUGO_symbol VARCHAR(255) COMMENT 'HUGO symbol for the gene (HUGO symbols are always in all caps). Unknown is used for regions that do not correspond to a gene.',
-Chromosome VARCHAR(255) COMMENT 'The affected chromosome (chr1).',
-Start_position INT COMMENT 'Lowest numeric position of the reported variant on the genomic reference sequence. Mutation start coordinate.',
-End_position INT COMMENT 'Highest numeric genomic position of the reported variant on the genomic reference sequence. Mutation end coordinate.',
-Reference_Allele VARCHAR(255) COMMENT 'The plus strand reference allele at this position. Includes the deleted sequence for a deletion or - for an insertion.',
-Variant_Classification VARCHAR(255) COMMENT 'Translational effect of variant allele.',
-Variant_Type CHAR COMMENT 'Type of mutation. TNP (tri-nucleotide polymorphism) is analogous to DNP (di-nucleotide polymorphism) but for three consecutive nucleotides. ONP (oligo-nucleotide polymorphism) is analogous to TNP but for consecutive runs of four or more (SNP, DNP, TNP, ON',
-Mutation_Status CHAR COMMENT 'An assessment of the mutation as somatic, germline, LOH, post transcriptional modification, unknown, or none. The values allowed in this field are constrained by the value in the Validation_Status field.',
-Exon_Number INT COMMENT 'The exon number (out of total number).',
-Transcript_ID INT COMMENT 'Ensembl ID of the transcript affected by the variant.',
-Protein_Position CHAR COMMENT 'Relative position of affected amino acid in protein. A - symbol is displayed as the numerator if the variant does not appear in coding sequence.',
-Codons CHAR COMMENT 'The alternative codons with the variant base in upper case',
-BIOTYPE CHAR COMMENT 'Biotype of transcript.',
 PRIMARY KEY (id)
 );
 
@@ -156,26 +139,6 @@ FPKM FLOAT COMMENT 'Normalized transcript abundance - Fragments Per Kilobase Mil
 PRIMARY KEY (id)
 );
 
-CREATE TABLE mRNAseq_variant_call_annotation
-(
-id INT,
-mRNAseq_id INT COMMENT 'Foreign key. Unique key for each mRNA sequencing experiment (per cell line per condition).',
-HUGO_symbol VARCHAR(255) COMMENT 'HUGO symbol for the gene (HUGO symbols are always in all caps). Unknown is used for regions that do not correspond to a gene.',
-Chromosome VARCHAR(255) COMMENT 'The affected chromosome (chr1).',
-Start_position INT COMMENT 'Lowest numeric position of the reported variant on the genomic reference sequence. Mutation start coordinate.',
-End_position INT COMMENT 'Highest numeric genomic position of the reported variant on the genomic reference sequence. Mutation end coordinate.',
-Reference_Allele VARCHAR(255) COMMENT 'The plus strand reference allele at this position. Includes the deleted sequence for a deletion or - for an insertion.',
-Variant_Classification VARCHAR(255) COMMENT 'Translational effect of variant allele.',
-Variant_Type CHAR COMMENT 'Type of mutation. TNP (tri-nucleotide polymorphism) is analogous to DNP (di-nucleotide polymorphism) but for three consecutive nucleotides. ONP (oligo-nucleotide polymorphism) is analogous to TNP but for consecutive runs of four or more (SNP, DNP, TNP, ON',
-Mutation_Status CHAR COMMENT 'An assessment of the mutation as somatic, germline, LOH, post transcriptional modification, unknown, or none. The values allowed in this field are constrained by the value in the Validation_Status field.',
-Exon_Number INT COMMENT 'The exon number (out of total number).',
-Transcript_ID INT COMMENT 'Ensembl ID of the transcript affected by the variant.',
-Protein_Position CHAR COMMENT 'Relative position of affected amino acid in protein. A - symbol is displayed as the numerator if the variant does not appear in coding sequence.',
-Codons CHAR COMMENT 'The alternative codons with the variant base in upper case',
-BIOTYPE CHAR COMMENT 'Biotype of transcript.',
-PRIMARY KEY (id)
-);
-
 CREATE TABLE proliferation_measurement_timing
 (
 id INT,
@@ -198,7 +161,7 @@ score FLOAT COMMENT 'Replicate number. Technical replicate identifier. Also call
 sequence CHAR COMMENT 'The name of the sequence from the protein database.',
 modifications CHAR COMMENT 'The score assigned by PeptideProphet. This score represents the probability that the peptide identification is correct. A higher score indicates a better match.',
 x_corr FLOAT COMMENT 'The sequence of the peptide match. The previous and next amino acids in the database sequence are printed before/after the identified peptide, separated by periods.',
-description TEXT COMMENT 'Short description of the protein nature and function.',
+description TEXT COMMENT 'Short description of the protein\'s nature and function.',
 modifications_all_sites CHAR COMMENT 'The score assigned by PeptideProphet. This score represents the probability that the peptide identification is correct. A higher score indicates a better match.',
 sample INT COMMENT 'Replicate number. Technical replicate identifier. Also called preplicate for preparation replicate. Options: 1; 2; N/A. I.e. two internal replicates were prepared to make the TMT-10-plex mixture. 1 - indicates that this is the first of 3 preplicates; 2 - ',
 abundance_ratio_F1_127N_F1_126 FLOAT,
@@ -276,7 +239,7 @@ num_peptides INT COMMENT 'The number of filtered peptides in the run that were m
 unique_peptides INT COMMENT 'The number of unique filtered peptides in the run that were matched to this sequence.',
 modifications CHAR COMMENT 'The score assigned by PeptideProphet. This score represents the probability that the peptide identification is correct. A higher score indicates a better match.',
 x_corr FLOAT COMMENT 'The sequence of the peptide match. The previous and next amino acids in the database sequence are printed before/after the identified peptide, separated by periods.',
-description TEXT COMMENT 'Short description of the protein nature and function.',
+description TEXT COMMENT 'Short description of the protein\'s nature and function.',
 replicate INT COMMENT 'Replicate number. Technical replicate identifier. Also called preplicate for preparation replicate. Options: 1; 2; N/A. I.e. two internal replicates were prepared to make the TMT-10-plex mixture. 1 - indicates that this is the first of 3 preplicates; 2 - ',
 PRIMARY KEY (id)
 );
@@ -382,11 +345,11 @@ sub_id CHAR COMMENT 'Foreign key. Normalized string unique for each culture cond
 cl_id CHAR COMMENT 'Foreign key. Cell line id: normalized string uniquely identifying each cell line; human readable but not equivalent to standard catalog cell line names.',
 distance FLOAT COMMENT 'Distance value reported by ImageJ - not used in downstream summary motility calculations for now. Multiple measurements per cell line and culture condition.',
 pixel_value FLOAT COMMENT 'Pixel value reported by ImageJ - not used in downstream summary motility calculations for now. Multiple measurements per cell line and culture condition. Please refer to ImageJ\'s manual for this value\'s description.',
-slice INT COMMENT 'Frame number for the position indicated by pixel (x, y) coordinates; time between frames is 5 minutes for all but cell line DU145, plate 1 = 6.5 min; and cell line Caov3 = 1 hour.',
+slice INT COMMENT 'Frame number for the position indicated by pixel\'s (x, y) coordinates; time between frames is 5 minutes for all but cell line DU145, plate 1 = 6.5 min; and cell line Caov3 = 1 hour.',
 track INT COMMENT 'Unique ID of a cell being tracked (i.e. indicates which cell is tracked in this measurement).',
 velocity FLOAT COMMENT 'Velocity value reported by ImageJ - not used in downstream summary motility calculations for now. Multiple measurements per cell line and culture condition. Please refer to ImageJ\'s manual for this value\'s description.',
-x FLOAT COMMENT 'x-coordinate (in pixels) of this cell position in this frame; each pixel corresponds to 1.5 micrometers.',
-y FLOAT COMMENT 'y-coordinate (in pixels) of this cell position in this frame; each pixel corresponds to 1.5 micrometers.',
+x FLOAT COMMENT 'x-coordinate (in pixels) of this cell\'s position in this frame; each pixel corresponds to 1.5 micrometers.',
+y FLOAT COMMENT 'y-coordinate (in pixels) of this cell\'s position in this frame; each pixel corresponds to 1.5 micrometers.',
 PRIMARY KEY (id)
 );
 
@@ -449,7 +412,7 @@ total_filtered_peptides INT COMMENT 'The number of filtered peptides in the run 
 unique_filtered_peptides INT COMMENT 'The number of unique filtered peptides in the run that were matched to this sequence.',
 pep_prophet FLOAT COMMENT 'The score assigned by PeptideProphet. This score represents the probability that the peptide identification is correct. A higher score indicates a better match.',
 peptide CHAR COMMENT 'The sequence of the peptide match. The previous and next amino acids in the database sequence are printed before/after the identified peptide, separated by periods.',
-description TEXT COMMENT 'Short description of the protein nature and function.',
+description TEXT COMMENT 'Short description of the protein\'s nature and function.',
 PRIMARY KEY (id)
 );
 
@@ -460,7 +423,79 @@ sub_id CHAR COMMENT 'Foreign key. Normalized string unique for each culture cond
 cl_id CHAR COMMENT 'Foreign key. Cell line id: normalized string uniquely identifying each cell line; human readable but not equivalent to standard catalog cell line names.',
 atomic_force_measurement_id CHAR UNIQUE  COMMENT 'Concatenation of each cell condition, cell line and trial combination - unique identifier for each atomic force measurement measurement.',
 date DATE COMMENT 'Date the measurement was performed.',
-young_modulus FLOAT COMMENT 'Elastic modulus calculation for cell membrane stiffness (i.e. Young modulus) based on the movement of the AFM piezo and deflection of the cantilever during extension phase. Please refer to https://www.synapse.org/#!Synapse:syn7248585 for more details o',
-spring_constant FLOAT COMMENT 'Spring constant calculation of the cantilever used in Young modulus measurement. The resonant frequency of the cantilever was first measured by applying a range of vibrational frequencies to the cantilever(10-30,000 Hz) and determining the frequency wh',
+young_modulus FLOAT COMMENT 'Elastic modulus calculation for cell membrane stiffness (i.e. Young\'s modulus) based on the movement of the AFM piezo and deflection of the cantilever during extension phase. Please refer to https://www.synapse.org/#!Synapse:syn7248585 for more details o',
+spring_constant FLOAT COMMENT 'Spring constant calculation of the cantilever used in Young\'s modulus measurement. The resonant frequency of the cantilever was first measured by applying a range of vibrational frequencies to the cantilever(10-30,000 Hz) and determining the frequency wh',
 PRIMARY KEY (id)
 );
+
+ALTER TABLE exome_sequencing_files ADD FOREIGN KEY exome_id_idxfk (exome_id) REFERENCES exome_sequencing_summary (id);
+
+ALTER TABLE exome_structural_variants ADD FOREIGN KEY exome_id_idxfk_1 (exome_id) REFERENCES exome_sequencing_summary (id);
+
+ALTER TABLE exome_variant_analysis_annotation ADD FOREIGN KEY exome_id_idxfk_2 (exome_id) REFERENCES exome_sequencing_summary (id);
+
+ALTER TABLE miRNA_mapping_annotation ADD FOREIGN KEY miRNA_mapping_id_idxfk (miRNA_mapping_id) REFERENCES miRNA_mapping (id);
+
+ALTER TABLE miRNA_mapping_summary ADD FOREIGN KEY miRNA_mapping_id_idxfk_1 (miRNA_mapping_id) REFERENCES miRNA_mapping (id);
+
+ALTER TABLE mRNA_gene_transcript_annotation ADD FOREIGN KEY mRNA_gene_transcript_map_id_idxfk (mRNA_gene_transcript_map_id) REFERENCES mRNA_gene_transcript_map (id);
+
+ALTER TABLE proliferation_measurement_timing ADD FOREIGN KEY cl_id_idxfk (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE proteomics_tmt ADD FOREIGN KEY cl_id_idxfk_1 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE stiffness ADD FOREIGN KEY atomic_force_measurement_id_idxfk (atomic_force_measurement_id) REFERENCES stiffness_measurements (atomic_force_measurement_id);
+
+ALTER TABLE miRNA_differential_expression ADD FOREIGN KEY sub_id_idxfk (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE proteomics_phospho ADD FOREIGN KEY sub_id_idxfk_1 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE proteomics_phospho ADD FOREIGN KEY cl_id_idxfk_2 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE contractility ADD FOREIGN KEY sub_id_idxfk_2 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE contractility ADD FOREIGN KEY cl_id_idxfk_3 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE exome_sequencing_summary ADD FOREIGN KEY sub_id_idxfk_3 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE exome_sequencing_summary ADD FOREIGN KEY cl_id_idxfk_4 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE miRNA_differential_expression_files ADD FOREIGN KEY sub_id_idxfk_4 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE miRNA_differential_expression_files ADD FOREIGN KEY cl_id_idxfk_5 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE miRNA_mapping ADD FOREIGN KEY sub_id_idxfk_5 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE miRNA_mapping ADD FOREIGN KEY cl_id_idxfk_6 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE morphology ADD FOREIGN KEY sub_id_idxfk_6 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE morphology ADD FOREIGN KEY cl_id_idxfk_7 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE motility ADD FOREIGN KEY sub_id_idxfk_7 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE motility ADD FOREIGN KEY cl_id_idxfk_8 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE motility_measurements ADD FOREIGN KEY sub_id_idxfk_8 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE motility_measurements ADD FOREIGN KEY cl_id_idxfk_9 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE mRNA_gene_transcript_map ADD FOREIGN KEY sub_id_idxfk_9 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE mRNA_gene_transcript_map ADD FOREIGN KEY cl_id_idxfk_10 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE mRNA_sequencing_files ADD FOREIGN KEY sub_id_idxfk_10 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE mRNA_sequencing_files ADD FOREIGN KEY cl_id_idxfk_11 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE proliferation ADD FOREIGN KEY sub_id_idxfk_11 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE proliferation ADD FOREIGN KEY cl_id_idxfk_12 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE proteomics_iBAQ ADD FOREIGN KEY sub_id_idxfk_12 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE proteomics_iBAQ ADD FOREIGN KEY cl_id_idxfk_13 (cl_id) REFERENCES cell_line (cl_id);
+
+ALTER TABLE stiffness_measurements ADD FOREIGN KEY sub_id_idxfk_13 (sub_id) REFERENCES substrate (sub_id);
+
+ALTER TABLE stiffness_measurements ADD FOREIGN KEY cl_id_idxfk_14 (cl_id) REFERENCES cell_line (cl_id);
