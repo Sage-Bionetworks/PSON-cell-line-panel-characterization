@@ -1,9 +1,11 @@
 # PSON-cell-line-panel-characterization
 PSON cell line data model schema, database scripts, and related utilities
 
+Placeholder figure:
 
 ![alt text](https://raw.githubusercontent.com/milen-sage/PSON-cell-line-panel-characterization/master/data_model_fig3.png)
 
+Placeholder instructions:
 
 To instantiate a MySQL database:
 
