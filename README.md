@@ -16,7 +16,8 @@ https://www.synapse.org/#!Synapse:syn17093184
 
 3) assuming a working MySQL installation, login to mysql on the command line and create a new database
 
-mysql -u root -p
+mysql -u root -p 
+
 mysql>CREATE DATABASE "dbname";
 mysql>USE "dbname";
 
