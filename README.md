@@ -19,6 +19,7 @@ https://www.synapse.org/#!Synapse:syn17093184
 mysql -u root -p 
 
 mysql>CREATE DATABASE "dbname";
+
 mysql>USE "dbname";
 
 4) Run the SQL script db-scheme-sql.sql
